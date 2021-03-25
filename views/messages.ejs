@@ -1,0 +1,119 @@
+<div class="background">
+    <div class="grid wide container app-container">
+        <div class="row no-gutters">
+            <div class="col l-4 m-5 c-0">
+                <div class="history">
+                    <nav class="nav">
+                        <div class="nav__menu">
+                            <i class="nav__menu-icon fas fa-bars"></i>
+                            <h3 class="nav__menu-header">ChatApp</h3>
+                        </div>
+                        <div class="nav__user-container">
+                            <div class="nav__user">
+                                <% if (!user.user_avatar) { %>
+                                    <img src="/images/user_avatar.png" alt="" class="nav__user-avatar">
+                                    <%} else { %>
+                                        <img src="/images/tony.jpg" alt="" class="nav__user-avatar">
+                                        <% } %>
+                                            <i class="nav__user-icon fas fa-chevron-down"></i>
+                            </div>
+                            <div class="hover-menu nav__user-menu">
+                                <h5 class="hover-menu__header">
+                                    <% if (user.user_fullname) { %>
+                                        <%=user.user_fullname%>
+                                            <%} else { %>
+                                                <%=user.username%>
+                                                    <% } %>
+                                </h5>
+                                <ul class="hover-menu__list">
+                                    <li class="hover-menu__item">
+                                        <p>Trạng thái hoạt động</p>
+                                    </li>
+                                    <li class="hover-menu__item">
+                                        <a href="">Hồ Sơ</a>
+                                    </li>
+                                    <li class="hover-menu__item">
+                                        <a href="">Đăng xuất</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </nav>
+                    <div class="search">
+                        <div class="search__wrap">
+                            <i class="search__wrap-icon fas fa-search"></i>
+                            <input type="text" class="search__input" placeholder="Tìm kiếm cuộc trò chuyện">
+                        </div>
+                        <div class="search__add">
+                            <i class="search__add-icon fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="active__wrap active__wrap--empty">
+                        <p class="active__wrap-noti">Không có ai đang hoạt động</p>
+                        <ul class="active__list ">
+                            
+                        </ul>
+                    </div>
+                    <div class="history__list-wrap">
+                        <ul class="history__list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col l-8 m-7 c-12">
+                <div class="messages">
+                    <nav class="nav-mess">
+                        <div class="nav-mess__user nav-mess__user--online">
+                            <div class=" nav-mess__back-icon show-on-mobile ">
+                                <i class="fas fa-chevron-left"></i>
+                            </div>
+                            <div class="nav-mess__user-avatar">
+                                <% if (typeof contact==='undefined' || !contact.user_avatar) { %>
+                                    <img src="/images/user_avatar.png" alt="" class="nav-mess__user-img">
+                                    <%} else { %>
+                                        <img src="/images/steve.jpg" alt="" class="nav-mess__user-img">
+                                        <% } %>
+                            </div>
+                            <div class="nav-mess__user-info">
+                                <h3 class="nav-mess__user-name">Steve Rogers</h3>
+                                <p class="nav-mess__user-active">Đang hoạt động</p>
+                            </div>
+                        </div>
+                        <div class="nav-mess__control">
+                            <div class="nav-mess__icon-wrap">
+                                <i class="nav-mess__icon fas fa-phone-alt"></i>
+                                <i class="nav-mess__icon fas fa-video"></i>
+                                <i class="nav-mess__icon fas fa-info-circle"></i>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="messages__wrap">
+
+                    </div>
+                    <div class="messages__type">
+                        <div class="messages__feature">
+                            <i class="messages__feature-icon fas fa-smile"></i>
+                            <i class="messages__feature-icon fas fa-paperclip"></i>
+                            <i class="messages__feature-icon fas fa-image"></i>
+                        </div>
+
+                        <div class="messages__input-wrap">
+                            <input type="text" class="messages__input" placeholder="Aa" maxlength="100">
+                        </div>
+
+                        <div class="messages__send">
+                            <i class="messages__send-icon fas fa-paper-plane"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let userID = "<%=user.user_id%>"
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="module" src="/javascripts/chat.js"></script>

@@ -1,4 +1,36 @@
-
-    <h1><%=typeof title !== 'undefined' ? title : "ChatApp" %></h1>
-    <p>Welcome to <%=typeof title !== 'undefined' ? title : "ChatApp" %></p>
-  
+<div class="index__container">
+    <div class="logo">
+        <i class="logo-icon fas fa-comments"></i>
+    </div>
+    <h3 class="index__header">Kết nối với những người bạn yêu quý.</h3>
+    <form action="/" method="POST" id="login-form" class="index__form-control">
+        <p class="form__info-message"><%=typeof info != 'undefined' ? info.message : '' %></p>
+        <div class="form__group">
+            <input type="text" name="email" id="email" class="index__input" placeholder="Nhập email của bạn">
+            <span class="form__message"></span>
+        </div>
+        <div class="form__group">
+            <input type="password" name="password" id="password" class="index__input"
+                placeholder="Nhập mật khẩu của bạn">
+            <span class="form__message"></span>
+        </div>
+        <button type="submit" class="btn btn-primary index__login-btn">Đăng nhập</button>
+        <span class="index__remember-me"><input type="checkbox" class="index__checkbox">Duy trì kết nối</span>
+        <p class="index__paragraph">Chưa có tài khoản?<a class="index__link" href="/signup">Đăng ký</a> </p>
+    </form>
+</div>
+<script src="/javascripts/validator.js "></script>
+<script>
+    Validator({
+        form: '#login-form',
+        formGroupSelector: '.form__group',
+        errorSelector: '.form__message',
+        invalidClassName: 'form__group--invalid',
+        rules: [
+            Validator.isRequired('#email', 'Vui lòng nhập email'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#password', 'Vui lòng nhập password'),
+            Validator.minLength('#password', 8),
+        ],
+    })
+</script>

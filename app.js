@@ -4,11 +4,19 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
+const cfg = require('./common/config')
+const db = require('./common/database')
+const passport = require('passport');
+const session = require('express-session');
+const flash = require('express-flash')
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+db.connect();
+require('./common/passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +31,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+  session({
+    secret: "f5021625-037b-47a7-b8f3-ffe721bb3a0b",
+    resave: true,
+    saveUninitialized: true,
+    maxAge: 100000
+  })
+);
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
